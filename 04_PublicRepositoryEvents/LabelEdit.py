@@ -6,6 +6,7 @@ class InputLabel(tk.Label):
         self.text = text
         self.char_size = 15
         self.bind('<Any-KeyPress>', lambda event: self.letter_prod(event))
+        self.bind('<Button-1>', lambda event: self.mouse_click(event))
         self.cursor_create()
 
     def letter_prod(self, event):
@@ -42,6 +43,11 @@ class InputLabel(tk.Label):
     def right_cursor_move(self):
         if self.cursor_coord < len(self["text"]):
             self.cursor_coord += 1
+    
+    def mouse_click(self, event):
+        self.cursor_coord = event.x // self.char_size
+        self.cursor_place()
+        self.focus()
 
 class Application(tk.Frame):
     def __init__(self, master=None):
@@ -55,9 +61,6 @@ class Application(tk.Frame):
         self.L.grid(row=1, column=0, sticky='NEWS')
         self.quitButton = tk.Button(self, text='Quit', command=self.quit)
         self.quitButton.grid(row=2, column=0, sticky='E')
-  
-   
-
 
 app = Application()
 app.mainloop()
