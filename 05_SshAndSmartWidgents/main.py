@@ -34,6 +34,7 @@ class Application(tk.Frame):
     def create_oval_end(self, event):
         if self.exist_flag:
             self.c.move(self.item, event.x - self.mouse_press[0], event.y - self.mouse_press[1])
+            self.change_text()
         else:
             self.c.create_oval(self.mouse_press[0], self.mouse_press[1], event.x, event.y, width = 7, outline = 'green', fill = 'limegreen')
 
